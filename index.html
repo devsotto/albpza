@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alberto's Pizza — The Home of Buy 1 Take 1 Pizza (Static Preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+:root {
+    --primary:#F59E0B;--primary-dark:#D97706;--primary-light:#FCD34D;
+    --primary-bg:#FFFBEB;--secondary:#EA580C;--secondary-dark:#C2410C;
+    --accent:#92400E;--dark:#1C1917;--dark-soft:#292524;
+    --g900:#111827;--g800:#1F2937;--g700:#374151;--g600:#4B5563;
+    --g500:#6B7280;--g400:#9CA3AF;--g300:#D1D5DB;--g200:#E5E7EB;
+    --g100:#F3F4F6;--g50:#F9FAFB;--white:#FFFFFF;
+    --font-h:'Playfair Display',Georgia,serif;
+    --font-b:'Poppins',-apple-system,sans-serif;
+    --sh-sm:0 1px 2px rgba(0,0,0,.05);
+    --sh:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);
+    --sh-md:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);
+    --sh-lg:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);
+    --sh-xl:0 25px 50px -12px rgba(0,0,0,.25);
+    --r-sm:.5rem;--r:.75rem;--r-lg:1rem;--r-xl:1.5rem;
+    --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+body{overflow-x:hidden}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-h)}
+::-webkit-scrollbar{width:7px}
+::-webkit-scrollbar-track{background:var(--g100)}
+::-webkit-scrollbar-thumb{background:var(--primary);border-radius:4px}
+.section-pad{padding:5rem 0}
+.sec-label{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--secondary);margin-bottom:.7rem}
+.sec-label::before{content:'';width:28px;height:2px;background:var(--primary);border-radius:1px}
+.sec-title{font-size:clamp(1.85rem,4vw,2.85rem);margin-bottom:.85rem}
+.sec-sub{font-size:1rem;color:var(--g500);max-width:680px;margin:0 auto 2.75rem;line-height:1.75}
+
+/* ===== STANDARD NAVBAR ===== */
+.nb{
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+    border-bottom:1px solid rgba(0,0,0,.06);
+    padding:.65rem 0;
+    transition:var(--tr);z-index:1050
+}
+.nb.scrolled{
+    box-shadow:0 1px 12px rgba(0,0,0,.08);
+    padding:.45rem 0
+}
+.nb .navbar-brand{
+    display:flex;align-items:center;
+    margin-right:2rem
+}
+.nb .navbar-brand img{
+    height:65px; 
+    box-shadow:0 2px 8px rgba(245,158,11,.2);
+    transition:var(--tr);
+    border-radius:0 !important; 
+}
+.nb.scrolled .navbar-brand img{
+    height:55px; 
+    border-radius:0 !important; 
+}
+.nb .navbar-collapse{justify-content:flex-end}
+.nb .nav-link{
+    font-family:var(--font-b);font-weight:500;font-size:.88rem;
+    color:var(--g700)!important;padding:.5rem .9rem!important;
+    position:relative;letter-spacing:.01em;white-space:nowrap
+}
+.nb .nav-link::after{
+    content:'';position:absolute;bottom:2px;left:50%;
+    transform:translateX(-50%);width:0;height:2px;
+    background:var(--primary);border-radius:1px;
+    transition:none; 
+}
+.nb .nav-link:hover::after,.nb .nav-link.active::after{
+    width:50%;
+    transition:width .3s cubic-bezier(.4,0,.2,1); 
+}
+.nb .nav-link:hover{color:var(--primary-dark)!important}
+
+/* Order Now Button */
+.nb .nav-link.btn-ord{
+    background:var(--secondary);
+    color:#fff !important; 
+    border:none;
+    padding:.85rem 2.1rem!important; 
+    border-radius:50px;
+    font-weight:600;
+    font-size:.93rem; 
+    letter-spacing:.01em;
+    transition:background-color .3s ease, color .3s ease !important; 
+    box-shadow:none; 
+    margin-left:.4rem;
+    white-space:nowrap;
+    display:inline-flex; 
+    align-items:center; 
+    gap:.55rem;
+}
+.nb .nav-link.btn-ord:hover{
+    background:var(--primary);
+    color:#1C1917 !important; 
+    transform:none !important; 
+    box-shadow:none !important; 
+}
+.nb .nav-link.btn-ord::after{
+    display:none !important; 
+}
+
+.navbar-toggler{border:none;padding:.3rem;outline:none!important;box-shadow:none!important}
+.navbar-toggler:focus{box-shadow:none!important}
+.navbar-toggler-icon{width:1.4em;height:1.4em}
+
+/* Mobile Collapse Menu Styles */
+@media (max-width: 991.98px) {
+    .nb .navbar-collapse {
+        padding-top: 1rem;
+        padding-bottom: 0.5rem;
+    }
+    .nb .nav-link {
+        padding: 0.8rem 0 !important;
+        border-bottom: 1px solid var(--g100);
+        font-size: .95rem;
+    }
+    .nb .nav-link::after { display: none; }
+    .nb .btn-ord {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.2rem;
+        text-align: center;
+        width: 100%;
+        padding: .75rem !important;
+        font-size: .9rem;
+        margin-left: 0;
+    }
+}
+
+/* ===== HERO ===== */
+.hero{
+    position:relative;min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    background:url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1600&q=80') center/cover no-repeat
+}
+.hero::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(160deg,rgba(28,25,23,.92) 0%,rgba(100,40,10,.82) 45%,rgba(28,25,23,.9) 100%);
+    z-index:1
+}
+.hero-inner{
+    position:relative;z-index:3;text-align:center;
+    max-width:680px;padding:0 1.5rem
+}
+.hero-badge{
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:rgba(255,255,255,.1);backdrop-filter:blur(10px);
+    padding:.48rem 1.15rem;border-radius:50px;
+    font-size:.76rem;font-weight:600;color:var(--primary-light);
+    margin-bottom:1.6rem;border:1px solid rgba(255,255,255,.12)
+}
+.hero h1{
+    font-size:clamp(2.4rem,6vw,4.2rem);font-weight:800;
+    line-height:1.05;margin-bottom:1.3rem;color:var(--white)
+}
+.hero h1 .hl{color:var(--primary-light);position:relative;display:inline-block}
+.hero-sub{
+    font-size:1.05rem;color:rgba(255,255,255,.75);
+    max-width:520px;margin:0 auto 2.2rem;font-weight:400;line-height:1.8
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn-p{
+    background:var(--secondary);color:var(--white);
+    padding:.85rem 2.1rem;border-radius:50px;
+    font-weight:600;font-size:.93rem;border:none;
+    display:inline-flex;align-items:center;gap:.55rem;
+    transition:var(--tr);box-shadow:0 4px 16px rgba(234,88,12,.4)
+}
+.btn-p:hover{
+    background:var(--primary);color:var(--dark);
+    transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,158,11,.45)
+}
+.btn-o{
+    background:transparent;color:var(--white);
+    padding:.85rem 2.1rem;border-radius:50px;
+    font-weight:600;font-size:.93rem;
+    border:2px solid rgba(255,255,255,.6);
+    display:inline-flex;align-items:center;gap:.55rem;
+    transition:var(--tr)
+}
+.btn-o:hover{
+    background:var(--white);color:var(--dark);
+    border-color:var(--white);transform:translateY(-2px);
+    box-shadow:0 8px 28px rgba(0,0,0,.3)
+}
+
+/* ===== ABOUT ===== */
+.about-img-wrap{position:relative}
+.about-img-wrap>img{border-radius:var(--r-xl);box-shadow:var(--sh-lg);object-fit:cover;width:100%;aspect-ratio:4/3}
+
+/* ===== MENU ===== */
+.menu-sec{background:var(--g50)}
+.m-toolbar{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.m-filter{display:flex;gap:.4rem;flex-wrap:wrap}
+.m-filter .bf{background:var(--white);color:var(--g600);border:1px solid var(--g200);padding:.45rem 1.1rem;border-radius:50px;font-size:.9rem;font-weight:500;cursor:pointer;transition:var(--tr);font-family:var(--font-b);white-space:nowrap}
+.m-filter .bf:hover,.m-filter .bf.on{background:var(--primary);color:var(--white);border-color:var(--primary);box-shadow:0 2px 8px rgba(245,158,11,.3)}
+.m-search{position:relative}
+.m-search input{width:200px;padding:.45rem 2.2rem .45rem 2.4rem;border:1px solid var(--g200);border-radius:50px;font-family:var(--font-b);font-size:.82rem;background:var(--white);transition:var(--tr);color:var(--dark)}
+.m-search input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(245,158,11,.1);width:240px}
+.m-search .si{position:absolute;left:.8rem;top:50%;transform:translateY(-50%);color:var(--g400);font-size:.95rem;pointer-events:none}
+.btn-clear-search{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:none;border:none;padding:0;color:var(--g400);cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;transition:var(--tr);z-index:2}
+.btn-clear-search:hover{color:var(--dark);background:var(--g200)}
+
+.mc{background:var(--white);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);border:1px solid var(--g100);transition:var(--tr);height:100%;display:flex;flex-direction:column}
+.mc:hover{transform:translateY(-4px);box-shadow:var(--sh-lg);border-color:rgba(245,158,11,.18)}
+.mc-img{display:block;position:relative;overflow:hidden;aspect-ratio:4/3}
+.mc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.mc:hover .mc-img img{transform:scale(1.05)}
+.mc-badge{position:absolute;top:.7rem;left:.7rem;background:var(--secondary);color:var(--white);font-size:.67rem;font-weight:600;padding:.22rem .7rem;border-radius:50px;text-transform:uppercase;letter-spacing:.04em}
+.mc-body{padding:1.2rem;flex:1;display:flex;flex-direction:column}
+.mc-name{font-family:var(--font-b);font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:.25rem}
+.mc-desc{font-size:.85rem;color:var(--g500);margin-bottom:1rem;flex:1;line-height:1.5} 
+
+.mc-opts{margin-bottom:1rem}
+.mc-opt-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.5rem 0;border-bottom:1px solid var(--g100);
+    cursor:pointer;
+}
+.mc-opt-row:last-child{border-bottom:none}
+.mc-opt-left{display:flex;align-items:center;gap:.6rem;color:var(--g700);font-weight:500; font-size:.9rem;}
+.mc-opt-right{font-weight:600;color:var(--secondary); font-size:.9rem;}
+.mc-opt-row input[type="radio"]{
+    appearance:none;width:16px;height:16px;border:2px solid var(--g300);
+    border-radius:50%;position:relative;cursor:pointer;transition:var(--tr);
+}
+.mc-opt-row input[type="radio"]:checked{
+    border-color:var(--secondary);background:var(--white);
+}
+.mc-opt-row input[type="radio"]:checked::after{
+    content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:8px;height:8px;background:var(--secondary);border-radius:50%;
+}
+.mc-opt-row:has(input:checked) .mc-opt-left{color:var(--secondary-dark)}
+
+.mc-foot{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-top:auto;padding-top:.5rem}
+
+.mc-qty{display:flex;align-items:center;gap:.4rem}
+.btn-qty{
+    width:34px;height:34px;border:1px solid var(--g400);border-radius:50px;
+    background:var(--white);color:var(--g600);font-size:1rem;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:var(--tr);
+    line-height:1;
+}
+.btn-qty:hover{background:var(--primary);color:var(--white);border-color:var(--primary)}
+.qty-val{width:24px;text-align:center;font-size:.9rem;font-weight:600;color:var(--dark)}
+
+.btn-add-order{
+    height:34px;
+    background:var(--secondary);color:var(--white);border:none;
+    padding:0 1.2rem; 
+    border-radius:50px;font-weight:600;font-size:.85rem; 
+    display:flex;align-items:center;justify-content:center;gap:.4rem;
+    transition:background-color .3s ease, color .3s ease;cursor:pointer;white-space:nowrap;
+}
+.btn-add-order:hover{background:var(--primary);color:var(--dark)}
+
+@keyframes fiu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.no-menu{text-align:center;padding:3rem 1rem;color:var(--g400);display:none}
+.no-menu.show{display:block}
+.no-menu i{font-size:2.2rem;display:block;margin-bottom:.5rem}
+
+/* ===== PROMO ===== */
+.promo{position:relative;padding:5rem 0;overflow:hidden;background:url('https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=1400&q=80') center/cover no-repeat}
+.promo::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(234,88,12,.92) 0%,rgba(146,64,14,.88) 50%,rgba(28,25,23,.92) 100%);z-index:1}
+.promo .container{position:relative;z-index:2}
+.promo h2{color:var(--white);font-size:clamp(1.85rem,4vw,3.2rem);margin-bottom:.9rem}
+.promo h2 .ul{text-decoration:underline;text-decoration-color:var(--primary-light);text-underline-offset:8px;text-decoration-thickness:3px}
+.promo-txt{color:rgba(255,255,255,.85);font-size:1rem;max-width:480px;margin-bottom:2rem;line-height:1.8}
+.btn-pro{background:var(--white);color:var(--secondary);padding:.85rem 2rem;border-radius:50px;font-weight:700;font-size:.92rem;border:none;display:inline-flex;align-items:center;gap:.5rem;transition:var(--tr)}
+.btn-pro:hover{background:var(--primary-light);color:var(--dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.promo-img{border-radius:var(--r-xl);box-shadow:0 25px 50px rgba(0,0,0,.3);max-width:360px;margin:0 auto;display:block}
+
+/* ===== BRANCHES ===== */
+.br-search{max-width:400px;margin:0 auto 2rem;position:relative}
+.br-search input{width:100%;padding:.82rem 2.4rem .82rem 2.8rem;border:2px solid var(--g200);border-radius:50px;font-family:var(--font-b);font-size:.88rem;background:var(--white);transition:var(--tr);color:var(--dark)}
+.br-search input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(245,158,11,.1)}
+.br-search .si{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--g400);font-size:1.05rem}
+.map-wrap{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-md);border:2px solid var(--g100);height:460px}
+.map-wrap iframe{width:100%;height:100%;border:none}
+.br-list{max-height:460px;overflow-y:auto;padding-right:.4rem}
+.br-list::-webkit-scrollbar{width:4px}
+.br-list::-webkit-scrollbar-thumb{background:var(--g300);border-radius:2px}
+.br-item{padding:.85rem 1rem;border-radius:var(--r);border:1px solid var(--g100);margin-bottom:.6rem;cursor:pointer;transition:var(--tr);background:var(--white)}
+.br-item:hover,.br-item.on{border-color:var(--primary);background:var(--primary-bg);box-shadow:0 2px 8px rgba(245,158,11,.1)}
+.br-item .bn{font-family:var(--font-b);font-weight:600;font-size:.86rem;color:var(--dark);margin-bottom:.15rem}
+.br-item .ba{font-size:.77rem;color:var(--g500);margin-bottom:.25rem;line-height:1.4}
+.br-item .bc{font-size:.77rem;color:var(--g500);margin-bottom:.25rem;line-height:1.4;display:flex;align-items:center;gap:.35rem}
+.br-item .bc i{color:var(--primary-dark);font-size:.72rem}
+.br-item .bh{font-size:.72rem;color:var(--primary-dark);font-weight:500;display:flex;align-items:center;gap:.3rem}
+.br-rh{font-family:var(--font-b);font-size:.74rem;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.1em;padding:.4rem 1rem;margin-top:.8rem;margin-bottom:.15rem}
+.br-rh:first-child{margin-top:0}
+.no-res{text-align:center;padding:2rem;color:var(--g400);font-size:.88rem;display:none}
+.no-res.show{display:block}
+
+/* ===== SOCIAL ===== */
+/* overflow removed: as a direct flex child of body on WooCommerce pages, overflow:hidden
+   reset this section's automatic flex min-height to 0, letting it get force-shrunk (clipped)
+   whenever total page content exceeded body's inherited height:100% -- causing the footer to
+   render over the clipped remainder. Not needed for the background-image itself. */
+.soc-sec{position:relative;padding:5rem 0;background:url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1400&q=80') center/cover no-repeat}
+.soc-sec::before{content:'';position:absolute;inset:0;background:linear-gradient(145deg,rgba(28,25,23,.88) 0%,rgba(100,45,10,.82) 50%,rgba(28,25,23,.88) 100%);z-index:1}
+.soc-sec .container{position:relative;z-index:2}
+.soc-sec .sec-label{color:var(--primary-light)}
+.soc-sec .sec-label::before{background:var(--primary-light)}
+.soc-sec .sec-title{color:var(--white)}
+.soc-sec .soc-sub{color:rgba(255,255,255,.7)!important}
+.soc-icons{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.8rem}
+.soc-ic{width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.15);transition:var(--tr)}
+.soc-ic:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.soc-ic.fb:hover{background:#1877F2;color:#fff;border-color:#1877F2}
+.soc-ic.ig:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border-color:transparent}
+.soc-ic.pi:hover{background:#E60023;color:#fff;border-color:#E60023}
+
+/* ===== ELEMENTOR HOME SOCIAL SECTION ===== */
+/*
+ * The Shop page renders the social section through [pizza_social_section], while
+ * the Home page renders the equivalent content with Elementor/XPro. Keep the
+ * Elementor version on the same rhythm as .soc-sec instead of inheriting the
+ * larger default widget gaps from the Elementor container.
+ */
+.home #social.soc-sec{
+    padding:5rem 0 !important;
+}
+.home #social .elementor-element-83d007a{
+    row-gap:0 !important;
+}
+.home #social .elementor-element-4d28a4f{
+    margin-bottom:.7rem !important;
+}
+.home #social .elementor-element-c05c531{
+    margin-bottom:.4rem !important;
+}
+.home #social .elementor-element-56403ba{
+    margin-bottom:0 !important;
+}
+.home #social .elementor-element-50096b0{
+    margin-top:1.8rem !important;
+    margin-bottom:0 !important;
+}
+/* Match the Home page's Xpro social icons to the same circular style and
+ * per-brand hover used by .soc-ic (footer + shop/checkout social section),
+ * instead of the plugin's default uniform amber hover. */
+.home #social .xpro-social-icon{
+    width:58px !important;
+    height:58px !important;
+    border-radius:50% !important;
+    background:rgba(255,255,255,.1) !important;
+    backdrop-filter:blur(8px);
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(255,255,255,.15) !important;
+    transition:var(--tr) !important;
+}
+.home #social .xpro-social-icon:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 24px rgba(0,0,0,.3);
+}
+.home #social .xpro-social-icon.elementor-social-icon-facebook-f:hover{
+    background:#1877F2 !important;
+    border-color:#1877F2 !important;
+}
+.home #social .xpro-social-icon.elementor-social-icon-instagram:hover{
+    background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888) !important;
+    border-color:transparent !important;
+}
+.home #social .xpro-social-icon.elementor-social-icon-pinterest-p:hover{
+    background:#E60023 !important;
+    border-color:#E60023 !important;
+}
+
+/* ===== FOOTER ===== */
+.ft{background:var(--g900);color:var(--g400);padding:4.5rem 0 0}
+.ft h5{color:var(--white);font-family:var(--font-b);font-size:.92rem;font-weight:600;margin-bottom:1.3rem}
+.ft-brand img{height:44px;box-shadow:0 1px 6px rgba(245,158,11,.15);margin-bottom:.9rem; border-radius:0 !important;}
+.ft-desc{font-size:.83rem;line-height:1.7;color:var(--g500);max-width:280px}
+.ft-links{list-style:none;padding:0;margin:0}
+.ft-links li{margin-bottom:.6rem}
+.ft-links a{color:var(--g500);font-size:.83rem;transition:var(--tr)}
+.ft-links a:hover{color:var(--primary);padding-left:4px}
+.ft-ci{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.9rem}
+.ft-ci i{color:var(--primary);font-size:1.05rem;margin-top:2px}
+.ft-ci span{font-size:.83rem;color:var(--g500);line-height:1.5}
+.ft-bot{border-top:1px solid rgba(255,255,255,.07);padding:1.3rem 0;margin-top:3.5rem}
+.ft-bot p{font-size:.78rem;color:var(--g600);margin:0}
+.ft-soc{display:flex;gap:.5rem;margin-top:1rem}
+.ft-soc .soc-ic{width:36px;height:36px;font-size:.9rem;border:none;background:rgba(255,255,255,.06)}
+.ft-soc .soc-ic:hover{transform:translateY(-2px)}
+
+/* ===== BACK TO TOP ===== */
+.btt{position:fixed;bottom:1.5rem;right:1.5rem;width:46px;height:46px;border-radius:50%;background:var(--secondary);color:var(--white);border:none;display:flex;align-items:center;justify-content:center;font-size:1.15rem;cursor:pointer;box-shadow:0 4px 14px rgba(234,88,12,.4);transition:var(--tr);opacity:0;visibility:hidden;transform:translateY(18px);z-index:1000}
+.btt.vis{opacity:1;visibility:visible;transform:translateY(0)}
+.btt:hover{background:var(--secondary-dark);transform:translateY(-3px)}
+
+/* ===== TOAST ===== */
+.toast-c{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:9999}
+.c-toast{background:var(--dark);color:var(--white);padding:.8rem 1.4rem;border-radius:50px;font-size:.83rem;font-weight:500;box-shadow:var(--sh-xl);display:flex;align-items:center;gap:.45rem;animation:su .3s ease,fo .3s ease 2.5s forwards;white-space:nowrap}
+@keyframes su{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fo{from{opacity:1}to{opacity:0;visibility:hidden}}
+
+/* ===== FADE IN ===== */
+.fi{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.fi.vis{opacity:1;transform:translateY(0)}
+
+/* ===== RESPONSIVE lg ===== */
+@media(max-width:991.98px){
+    .hero{min-height:auto;padding:7rem 0 5rem}
+    .br-list{max-height:350px;margin-top:1.3rem}
+    .map-wrap{height:350px}
+    .promo-img{max-width:280px}
+    .nb .navbar-brand{margin-right:0}
+}
+
+/* ===== RESPONSIVE md ===== */
+@media(max-width:767.98px){
+    .section-pad{padding:3.5rem 0}
+    .hero{padding:6rem 0 4rem}
+    .hero-btns{flex-direction:column;align-items:center}
+    .hero-btns .btn-p,.hero-btns .btn-o{width:100%;max-width:280px;justify-content:center}
+    .m-toolbar{flex-direction:column;gap:.8rem}
+    .m-search input{width:100%}
+    .m-search input:focus{width:100%}
+    .m-filter{justify-content:center}
+    .ft{text-align:center}
+    .ft-brand img{margin:0 auto .9rem}
+    .ft-desc{margin:0 auto}
+    .ft-ci{justify-content:center}
+    .ft-soc{justify-content:center}
+    .promo{padding:3.5rem 0}
+    .soc-sec{padding:3.5rem 0}
+    .home #social.soc-sec{
+        padding:3.5rem 0 !important;
+    }
+}
+
+/* ===== RESPONSIVE sm ===== */
+@media(max-width:575.98px){
+    .hero h1{font-size:2rem}
+    .hero-sub{font-size:.9rem}
+    .hero-badge{font-size:.7rem;padding:.38rem .9rem}
+    .btn-p,.btn-o{padding:.75rem 1.6rem;font-size:.88rem}
+    .nb .navbar-brand img{height:50px; border-radius:0 !important;} 
+    .nb.scrolled .navbar-brand img{height:45px; border-radius:0 !important;} 
+    .map-wrap{height:250px}
+    .br-list{max-height:250px}
+    .sec-sub{font-size:.9rem}
+    .m-filter .bf{padding:.38rem .85rem;font-size:.85rem}
+    .br-search input{padding:.7rem 1rem .7rem 2.5rem;font-size:.84rem}
+    .soc-ic{width:50px;height:50px;font-size:1.15rem}
+    .mc-body{padding:1rem}
+    .mc-name{font-size:1rem}
+    .mc-opt-left{font-size:.85rem}
+    .mc-opt-right{font-size:.85rem}
+    .btn-qty{width:30px;height:30px;font-size:.9rem}
+    .btn-add-order{height:30px; padding:0 .9rem; font-size:.8rem}
+}
+
+/* ===== MAP ZOOM CONTROLS (desktop only, via d-none d-lg-flex) ===== */
+.map-wrap{position:relative}
+.map-zoom-ctrl{position:absolute;top:.75rem;right:.75rem;flex-direction:column;gap:.4rem;z-index:5}
+.map-zoom-ctrl button{width:34px;height:34px;border-radius:6px;border:1px solid var(--g200);background:var(--white);color:var(--g700);font-size:1.1rem;font-weight:600;box-shadow:var(--sh-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--tr);line-height:1}
+.map-zoom-ctrl button:hover{background:var(--primary);color:var(--white);border-color:var(--primary)}
+
+/* HEADING COLOR FIX */
+h1,h2,h3,h4,h5,h6{color:var(--dark)}
+.hero h1{color:var(--white)}
+.promo h2{color:var(--white)}
+.soc-sec .sec-title{color:var(--white)}
+
+
+.mc-opt-price{font-weight:600;color:var(--secondary);font-size:.9rem}
+/* ===== Static snapshot extras ===== */
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);color:var(--dark);background:#fff}
+section[id],div[id]{scroll-margin-top:90px}
+a{text-decoration:none}
+/* Cart drawer */
+.cart-overlay{position:fixed;inset:0;background:rgba(28,25,23,.55);opacity:0;visibility:hidden;transition:var(--tr);z-index:2000}
+.cart-overlay.show{opacity:1;visibility:visible}
+.cart-drawer{position:fixed;top:0;right:0;height:100dvh;width:min(400px,92vw);background:#fff;z-index:2001;transform:translateX(105%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:var(--sh-xl)}
+.cart-drawer.show{transform:translateX(0)}
+.cart-head{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.25rem;border-bottom:1px solid var(--g100)}
+.cart-head h5{margin:0;font-family:var(--font-b);font-weight:600}
+.cart-close{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--g500)}
+.cart-items{flex:1;overflow-y:auto;padding:1rem 1.25rem;display:flex;flex-direction:column;gap:.8rem}
+.cart-empty{text-align:center;color:var(--g400);padding:2.5rem 0}
+.cart-line{display:flex;gap:.7rem;border:1px solid var(--g100);border-radius:var(--r);padding:.7rem}
+.cart-line img{width:64px;height:64px;object-fit:cover;border-radius:.5rem}
+.cart-line .cl-name{font-weight:600;font-size:.85rem}
+.cart-line .cl-meta{font-size:.75rem;color:var(--g500)}
+.cart-line .cl-row{display:flex;align-items:center;justify-content:space-between;margin-top:.4rem}
+.cart-line .cl-qty{display:flex;align-items:center;gap:.45rem}
+.cart-line .cl-qty button{width:24px;height:24px;border-radius:50%;border:1px solid var(--g300);background:#fff;cursor:pointer;line-height:1}
+.cart-line .cl-total{font-weight:700;color:var(--secondary);font-size:.85rem}
+.cart-line .cl-rm{background:none;border:none;color:var(--g400);cursor:pointer;font-size:.8rem}
+.cart-foot{padding:1.1rem 1.25rem;border-top:1px solid var(--g100)}
+.cart-subtotal{display:flex;justify-content:space-between;font-weight:700;margin-bottom:.9rem}
+.btn-checkout{width:100%;background:var(--secondary);color:#fff;border:none;border-radius:50px;padding:.8rem;font-weight:600;cursor:pointer}
+.btn-checkout:hover{background:var(--primary);color:var(--dark)}
+
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg nb fixed-top" id="nb"><div class="container">
+<a class="navbar-brand" href="#home"><img src="img/5a8d3b4b-0770-4c82-96ca-6a97a5ebcace.png" alt="Alberto's Pizza"></a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navContent"><ul class="navbar-nav ms-auto align-items-lg-center">
+<li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+<li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+<li class="nav-item"><a class="nav-link" href="#branches">Branches</a></li>
+<li class="nav-item"><a class="nav-link" href="#social">Follow Us</a></li>
+<li class="nav-item"><a class="nav-link btn-ord" id="navCartBtn" href="#menu"><i class="bi bi-pizza" id="navCartIcon"></i><span id="navCartLabel">Order Now</span></a></li>
+</ul></div></div></nav>
+
+<header class="hero" id="home"><div class="hero-inner">
+<div class="hero-badge"><i class="bi bi-fire"></i> The #1 Buy 1 Take 1 Pizza</div>
+<h1>Two Pizzas,<br><span class="hl">One Price.</span></h1>
+<p class="hero-sub">Craving delicious, affordable pizza? Alberto’s serves freshly baked, mouth-watering pizzas perfect for sharing — because great taste should come in pairs.</p>
+<div class="hero-btns"><a href="#menu" class="btn-p"><i class="bi bi-pizza"></i> View Menu</a><a href="#branches" class="btn-o"><i class="bi bi-geo-alt"></i> Find a Branch</a></div>
+</div></header>
+
+<section class="section-pad" id="about"><div class="container"><div class="row align-items-center g-5">
+<div class="col-lg-6"><div class="about-img-wrap fi"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&h=450&fit=crop" alt="Fresh pizza" loading="lazy"></div></div>
+<div class="col-lg-6 fi"><div class="sec-label">Our Story</div>
+<h2 class="sec-title">Affordable Pizza,<br>Unforgettable Taste</h2>
+<p style="color:var(--g600);line-height:1.8;margin-bottom:.9rem">Alberto’s Pizza began as a humble neighborhood pizza shop in Cebu City, just across from the Vicente Sotto Memorial Medical Center. From the very beginning, its founders were committed to one simple goal: serving delicious, high-quality pizzas at prices everyone could afford. By carefully balancing affordability with freshness and quality, they created a pizza experience that quickly won the hearts of their customers.</p>
+<p style="color:var(--g600);line-height:1.8">With its cozy space, Alberto’s Pizza initially focused on takeout and delivery services. But it didn’t take long for word to spread. As more people discovered this hidden gem, customers from all walks of life kept coming back for more. Before long, Alberto’s Pizza had built a loyal following, earning a reputation for its delicious menu, outstanding value, and warm, satisfying dining experience.</p>
+</div></div></div></section>
+
+<section class="section-pad menu-sec" id="menu"><div class="container">
+<div class="text-center"><div class="sec-label" style="justify-content:center">Our Menu</div>
+<h2 class="sec-title">Pick Your Favorite Pizza</h2>
+<p class="sec-sub">From all-time favorites like Full-House, Hawaiian, and Meaty Royale to unique sweet twists like Oreo Piña and Chocomallow, we have got a flavor for every craving. Our pizzas come in 9-inch and 11-inch sizes. Do not forget to pair your meal with our refreshing Fruit Shakes, Choco Shakes, or a classic Halo-Halo Espesyal to complete the experience!</p></div>
+<div class="m-toolbar fi"><div class="m-filter">
+<button class="bf on" data-f="all">All</button><button class="bf" data-f="bestseller">Best Sellers</button><button class="bf" data-f="classic">Classic</button><button class="bf" data-f="premium">Premium</button><button class="bf" data-f="veggie">Veggie</button>
+</div><div class="m-search"><i class="bi bi-search si"></i><input type="text" id="mSearch" placeholder="Search pizza..."><button type="button" class="btn-clear-search" id="mSearchClear" aria-label="Clear search" style="display:none;"><i class="bi bi-x-lg"></i></button></div></div>
+<div class="row g-4 justify-content-center" id="mGrid">
+<div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="bestseller premium" data-name="super supreme" data-desc="loaded with pepperoni, sausage, ham, bell peppers, mushrooms, and onions.">
+<div class="mc" data-product-id="19" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:20,&quot;price&quot;:214},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:21,&quot;price&quot;:219},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:22,&quot;price&quot;:314},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:23,&quot;price&quot;:319}}'>
+<a class="mc-img" href="#menu"><img src="img/super-supreme-77Ib7D.jpg" alt="Super Supreme" loading="lazy"><span class="mc-badge">Best Seller</span></a>
+<div class="mc-body"><div class="mc-name">Super Supreme</div><div class="mc-desc">Loaded with pepperoni, sausage, ham, bell peppers, mushrooms, and onions.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-19" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱299</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-19" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱199</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-19" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-19" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱314</span></button></div>
+</div></div></div><div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="bestseller classic" data-name="hawaiian" data-desc="classic combination of sweet pineapple chunks and savory ham on mozzarella.">
+<div class="mc" data-product-id="24" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:25,&quot;price&quot;:184},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:26,&quot;price&quot;:189},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:27,&quot;price&quot;:274},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:28,&quot;price&quot;:279}}'>
+<a class="mc-img" href="#menu"><img src="img/hawaiian-zsk66R.jpg" alt="Hawaiian" loading="lazy"><span class="mc-badge">Best Seller</span></a>
+<div class="mc-body"><div class="mc-name">Hawaiian</div><div class="mc-desc">Classic combination of sweet pineapple chunks and savory ham on mozzarella.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-24" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱259</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-24" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱169</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-24" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-24" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱274</span></button></div>
+</div></div></div><div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="bestseller classic" data-name="pepperoni" data-desc="generous layers of spicy pepperoni atop rich tomato sauce and melted cheese.">
+<div class="mc" data-product-id="29" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:30,&quot;price&quot;:194},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:31,&quot;price&quot;:199},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:32,&quot;price&quot;:284},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:33,&quot;price&quot;:289}}'>
+<a class="mc-img" href="#menu"><img src="img/pepperoni-hMVHvZ.jpg" alt="Pepperoni" loading="lazy"></a>
+<div class="mc-body"><div class="mc-name">Pepperoni</div><div class="mc-desc">Generous layers of spicy pepperoni atop rich tomato sauce and melted cheese.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-29" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱269</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-29" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱179</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-29" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-29" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱284</span></button></div>
+</div></div></div><div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="bestseller classic" data-name="cheese overload" data-desc="triple cheese blend of mozzarella, cheddar, and parmesan for cheese lovers.">
+<div class="mc" data-product-id="34" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:35,&quot;price&quot;:204},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:36,&quot;price&quot;:209},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:37,&quot;price&quot;:294},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:38,&quot;price&quot;:299}}'>
+<a class="mc-img" href="#menu"><img src="img/cheese-overload-TytcpA.jpg" alt="Cheese Overload" loading="lazy"><span class="mc-badge">Fan Favorite</span></a>
+<div class="mc-body"><div class="mc-name">Cheese Overload</div><div class="mc-desc">Triple cheese blend of mozzarella, cheddar, and parmesan for cheese lovers.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-34" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱279</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-34" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱189</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-34" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-34" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱294</span></button></div>
+</div></div></div><div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="premium" data-name="alberto&#x27;s special" data-desc="our signature pizza with a secret blend of premium meats and spices.">
+<div class="mc" data-product-id="39" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:40,&quot;price&quot;:224},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:41,&quot;price&quot;:229},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:42,&quot;price&quot;:324},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:43,&quot;price&quot;:329}}'>
+<a class="mc-img" href="#menu"><img src="img/albertos-special-gHsZRF.jpg" alt="Alberto&#x27;s Special" loading="lazy"><span class="mc-badge">Signature</span></a>
+<div class="mc-body"><div class="mc-name">Alberto&#x27;s Special</div><div class="mc-desc">Our signature pizza with a secret blend of premium meats and spices.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-39" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱309</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-39" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱209</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-39" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-39" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱324</span></button></div>
+</div></div></div><div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="classic" data-name="ham &amp; cheese" data-desc="simple yet satisfying — sliced ham with melted mozzarella cheese.">
+<div class="mc" data-product-id="44" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:45,&quot;price&quot;:174},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:46,&quot;price&quot;:179},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:47,&quot;price&quot;:264},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:48,&quot;price&quot;:269}}'>
+<a class="mc-img" href="#menu"><img src="img/ham-cheese-DMSIDv.jpg" alt="Ham &amp; Cheese" loading="lazy"></a>
+<div class="mc-body"><div class="mc-name">Ham &amp; Cheese</div><div class="mc-desc">Simple yet satisfying — sliced ham with melted mozzarella cheese.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-44" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱249</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-44" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱159</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-44" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-44" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱264</span></button></div>
+</div></div></div><div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="veggie" data-name="veggie garden" data-desc="fresh bell peppers, mushrooms, onions, tomatoes, and olives.">
+<div class="mc" data-product-id="49" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:50,&quot;price&quot;:184},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:51,&quot;price&quot;:189},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:52,&quot;price&quot;:274},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:53,&quot;price&quot;:279}}'>
+<a class="mc-img" href="#menu"><img src="img/veggie-garden-FoBmvv.jpg" alt="Veggie Garden" loading="lazy"></a>
+<div class="mc-body"><div class="mc-name">Veggie Garden</div><div class="mc-desc">Fresh bell peppers, mushrooms, onions, tomatoes, and olives.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-49" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱259</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-49" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱169</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-49" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-49" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱274</span></button></div>
+</div></div></div><div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="premium" data-name="bbq chicken" data-desc="smoky bbq sauce with grilled chicken, red onions, and cilantro.">
+<div class="mc" data-product-id="54" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:55,&quot;price&quot;:214},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:56,&quot;price&quot;:219},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:57,&quot;price&quot;:314},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:58,&quot;price&quot;:319}}'>
+<a class="mc-img" href="#menu"><img src="img/bbq-chicken-j41hrt.jpg" alt="BBQ Chicken" loading="lazy"><span class="mc-badge">New</span></a>
+<div class="mc-body"><div class="mc-name">Bbq Chicken</div><div class="mc-desc">Smoky bbq sauce with grilled chicken, red onions, and cilantro.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-54" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱299</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-54" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱199</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-54" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-54" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱314</span></button></div>
+</div></div></div><div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="premium" data-name="mexican wave" data-desc="spicy ground beef, jalapeños, nachos, and salsa drizzle.">
+<div class="mc" data-product-id="59" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:60,&quot;price&quot;:214},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:61,&quot;price&quot;:219},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:62,&quot;price&quot;:314},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:63,&quot;price&quot;:319}}'>
+<a class="mc-img" href="#menu"><img src="img/mexican-wave-CqtXip.jpg" alt="Mexican Wave" loading="lazy"><span class="mc-badge">Spicy</span></a>
+<div class="mc-body"><div class="mc-name">Mexican Wave</div><div class="mc-desc">Spicy ground beef, jalapeños, nachos, and salsa drizzle.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-59" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱299</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-59" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱199</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-59" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-59" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱314</span></button></div>
+</div></div></div><div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="veggie" data-name="mushroom &amp; garlic" data-desc="sautéed mushrooms with roasted garlic and white sauce base.">
+<div class="mc" data-product-id="64" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:65,&quot;price&quot;:194},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:66,&quot;price&quot;:199},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:67,&quot;price&quot;:284},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:68,&quot;price&quot;:289}}'>
+<a class="mc-img" href="#menu"><img src="img/mushroom-garlic-DGvkUd.jpg" alt="Mushroom &amp; Garlic" loading="lazy"></a>
+<div class="mc-body"><div class="mc-name">Mushroom &amp; Garlic</div><div class="mc-desc">Sautéed mushrooms with roasted garlic and white sauce base.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-64" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱269</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-64" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱179</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-64" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-64" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱284</span></button></div>
+</div></div></div><div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="classic" data-name="bacon &amp; mushroom" data-desc="crispy bacon bits paired with earthy mushrooms on cheese.">
+<div class="mc" data-product-id="69" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:70,&quot;price&quot;:204},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:71,&quot;price&quot;:209},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:72,&quot;price&quot;:294},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:73,&quot;price&quot;:299}}'>
+<a class="mc-img" href="#menu"><img src="img/bacon-mushroom-S0RSEl.jpg" alt="Bacon &amp; Mushroom" loading="lazy"></a>
+<div class="mc-body"><div class="mc-name">Bacon &amp; Mushroom</div><div class="mc-desc">Crispy bacon bits paired with earthy mushrooms on cheese.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-69" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱279</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-69" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱189</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-69" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-69" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱294</span></button></div>
+</div></div></div><div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="veggie" data-name="garden fresh" data-desc="a lighter option with fresh lettuce, tomatoes, and herbs.">
+<div class="mc" data-product-id="74" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:75,&quot;price&quot;:174},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:76,&quot;price&quot;:179},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:77,&quot;price&quot;:264},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:78,&quot;price&quot;:269}}'>
+<a class="mc-img" href="#menu"><img src="img/garden-fresh-vbIoEl.jpg" alt="Garden Fresh" loading="lazy"><span class="mc-badge">Light</span></a>
+<div class="mc-body"><div class="mc-name">Garden Fresh</div><div class="mc-desc">A lighter option with fresh lettuce, tomatoes, and herbs.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-74" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱249</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-74" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱159</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-74" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-74" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱264</span></button></div>
+</div></div></div><div class="col-12 col-sm-6 col-lg-4 col-xl-3 fi mc-col" data-cat="kiddie" data-name="kiddie cheesy delight" data-desc="a smaller, extra-cheesy pizza sized just right for little tummies — mild flavor the kids will love.">
+<div class="mc" data-product-id="79" data-variations='{&quot;9 inch|Quickmelt&quot;:{&quot;variation_id&quot;:80,&quot;price&quot;:144},&quot;9 inch|Mozzarella&quot;:{&quot;variation_id&quot;:81,&quot;price&quot;:149},&quot;11 inch|Quickmelt&quot;:{&quot;variation_id&quot;:82,&quot;price&quot;:214},&quot;11 inch|Mozzarella&quot;:{&quot;variation_id&quot;:83,&quot;price&quot;:219}}'>
+<a class="mc-img" href="#menu"><img src="img/kiddie-cheesy-delight-CW9Efu.jpg" alt="Kiddie Cheesy Delight" loading="lazy"></a>
+<div class="mc-body"><div class="mc-name">Kiddie Cheesy Delight</div><div class="mc-desc">A smaller, extra-cheesy pizza sized just right for little tummies — mild flavor the kids will love.</div>
+<div class="mc-opts"><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-79" value="11 inch" checked='checked'> 11 inch</div><div class="mc-opt-price">₱199</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="size-79" value="9 inch"> 9 inch</div><div class="mc-opt-price">₱129</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-79" value="Quickmelt" checked='checked'> Quickmelt</div></label><label class="mc-opt-row"><div class="mc-opt-left"><input type="radio" name="cheese-79" value="Mozzarella"> Mozzarella</div></label></div>
+<div class="mc-foot"><div class="mc-qty"><button class="btn-qty" data-action="dec" type="button">-</button><span class="qty-val">1</span><button class="btn-qty" data-action="inc" type="button">+</button></div>
+<button class="btn-add-order" type="button">Add <span class="mc-total">₱214</span></button></div>
+</div></div></div>
+</div>
+<div class="no-menu" id="noMenu"><i class="bi bi-search"></i>No pizzas found. Try a different search.</div>
+</div></section>
+
+<section class="promo"><div class="container"><div class="row align-items-center g-4">
+<div class="col-lg-6"><h2>Buy 1, <span class="ul">Take 1</span> — Always!</h2>
+<p class="promo-txt">Every single pizza on our menu comes with a free second pizza of the same flavor. No coupons needed, no special days. Just pure pizza joy, every day.</p>
+<a href="#menu" class="btn-pro"><i class="bi bi-pizza"></i> Order Now</a></div>
+<div class="col-lg-6"><img class="promo-img" src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&q=80" alt="Buy 1 Take 1 pizza" loading="lazy"></div>
+</div></div></section>
+
+<section class="section-pad" id="branches"><div class="container">
+<div class="d-flex flex-column align-items-center"><div class="sec-label" style="justify-content:center">Find Us</div>
+<h2 class="sec-title text-center">Locate a Branch Near You</h2>
+<p class="sec-sub text-center">With over 100 branches across the Philippines, there is always an Alberto's Pizza nearby.</p></div>
+<div class="br-search"><i class="bi bi-search si"></i><input type="text" id="brSearch" placeholder="Search branch name or city..."><button type="button" class="btn-clear-search" id="brSearchClear" aria-label="Clear search" style="display:none;"><i class="bi bi-x-lg"></i></button></div>
+<div class="row g-4"><div class="col-lg-7"><div class="map-wrap">
+<iframe id="mapFrame" src="https://maps.google.com/maps?q=10.3157,123.8854&z=6&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<div class="map-zoom-ctrl d-none d-lg-flex"><button type="button" id="mapZoomIn" aria-label="Zoom in">+</button><button type="button" id="mapZoomOut" aria-label="Zoom out">−</button></div>
+</div></div>
+<div class="col-lg-5"><div class="br-list" id="brList">
+<div class="br-rh" data-region-header="cebu city">Cebu City</div><div class="br-item" data-name="alberto&#x27;s pizza - mango" data-addr="mango ave, cebu city" data-region="cebu city" data-lat="10.3157" data-lng="123.8854">
+<div class="bn">Alberto&#x27;s Pizza - Mango</div><div class="bc"># (032) 253 0312 | 0917 237 1234</div><div class="ba">Mango Ave, Cebu City</div>
+<div class="bh"><i class="bi bi-clock"></i> 8:30 AM - 10:00 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - mabolo" data-addr="mabolo, cebu city" data-region="cebu city" data-lat="10.3169" data-lng="123.9012">
+<div class="bn">Alberto&#x27;s Pizza - Mabolo</div><div class="bc"># (032) 253 0312</div><div class="ba">Mabolo, Cebu City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - talamban" data-addr="talamban, cebu city" data-region="cebu city" data-lat="10.3551" data-lng="123.9084">
+<div class="bn">Alberto&#x27;s Pizza - Talamban</div><div class="ba">Talamban, Cebu City</div>
+<div class="bh"><i class="bi bi-clock"></i> 9:30 AM - 10:30 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - lahug" data-addr="lahug, cebu city" data-region="cebu city" data-lat="10.3225" data-lng="123.8978">
+<div class="bn">Alberto&#x27;s Pizza - Lahug</div><div class="ba">Lahug, Cebu City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - capitol" data-addr="capitol site, cebu city" data-region="cebu city" data-lat="10.31" data-lng="123.893">
+<div class="bn">Alberto&#x27;s Pizza - Capitol</div><div class="ba">Capitol Site, Cebu City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - labangon" data-addr="labangon, cebu city" data-region="cebu city" data-lat="10.2965" data-lng="123.885">
+<div class="bn">Alberto&#x27;s Pizza - Labangon</div><div class="ba">Labangon, Cebu City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - tisa" data-addr="tisa, cebu city" data-region="cebu city" data-lat="10.288" data-lng="123.88">
+<div class="bn">Alberto&#x27;s Pizza - Tisa</div><div class="ba">Tisa, Cebu City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - guadalupe" data-addr="guadalupe, cebu city" data-region="cebu city" data-lat="10.297" data-lng="123.898">
+<div class="bn">Alberto&#x27;s Pizza - Guadalupe</div><div class="ba">Guadalupe, Cebu City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-rh" data-region-header="mandaue city">Mandaue City</div><div class="br-item" data-name="alberto&#x27;s pizza - mandaue (ac cortes)" data-addr="a.c. cortes ave, mandaue city" data-region="mandaue city" data-lat="10.3235" data-lng="123.9218">
+<div class="bn">Alberto&#x27;s Pizza - Mandaue (AC Cortes)</div><div class="ba">A.C. Cortes Ave, Mandaue City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - mandaue proper" data-addr="city proper, mandaue city" data-region="mandaue city" data-lat="10.32" data-lng="123.925">
+<div class="bn">Alberto&#x27;s Pizza - Mandaue Proper</div><div class="ba">City Proper, Mandaue City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - mandaue (subangdaku)" data-addr="subangdaku, mandaue city" data-region="mandaue city" data-lat="10.328" data-lng="123.935">
+<div class="bn">Alberto&#x27;s Pizza - Mandaue (Subangdaku)</div><div class="ba">Subangdaku, Mandaue City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="lapu-lapu city">Lapu-Lapu City</div><div class="br-item" data-name="alberto&#x27;s pizza - lapu-lapu (ml quezon)" data-addr="ml quezon hwy, lapu-lapu city" data-region="lapu-lapu city" data-lat="10.3103" data-lng="123.9494">
+<div class="bn">Alberto&#x27;s Pizza - Lapu-Lapu (ML Quezon)</div><div class="ba">ML Quezon Hwy, Lapu-Lapu City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - lapu-lapu (pusok)" data-addr="pusok, lapu-lapu city" data-region="lapu-lapu city" data-lat="10.305" data-lng="123.955">
+<div class="bn">Alberto&#x27;s Pizza - Lapu-Lapu (Pusok)</div><div class="ba">Pusok, Lapu-Lapu City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="talisay city">Talisay City</div><div class="br-item" data-name="alberto&#x27;s pizza - talisay" data-addr="natalio b. bacalso ave, talisay city" data-region="talisay city" data-lat="10.258" data-lng="123.846">
+<div class="bn">Alberto&#x27;s Pizza - Talisay</div><div class="ba">Natalio B. Bacalso Ave, Talisay City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-rh" data-region-header="danao city">Danao City</div><div class="br-item" data-name="alberto&#x27;s pizza - danao" data-addr="danao city, cebu" data-region="danao city" data-lat="10.518" data-lng="123.81">
+<div class="bn">Alberto&#x27;s Pizza - Danao</div><div class="ba">Danao City, Cebu</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="carcar city">Carcar City</div><div class="br-item" data-name="alberto&#x27;s pizza - carcar" data-addr="carcar city, cebu" data-region="carcar city" data-lat="10.108" data-lng="123.841">
+<div class="bn">Alberto&#x27;s Pizza - Carcar</div><div class="ba">Carcar City, Cebu</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="minglanilla">Minglanilla</div><div class="br-item" data-name="alberto&#x27;s pizza - minglanilla" data-addr="minglanilla, cebu" data-region="minglanilla" data-lat="10.234" data-lng="123.814">
+<div class="bn">Alberto&#x27;s Pizza - Minglanilla</div><div class="ba">Minglanilla, Cebu</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="san fernando">San Fernando</div><div class="br-item" data-name="alberto&#x27;s pizza - san fernando" data-addr="san fernando, cebu" data-region="san fernando" data-lat="10.205" data-lng="123.81">
+<div class="bn">Alberto&#x27;s Pizza - San Fernando</div><div class="ba">San Fernando, Cebu</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="naga">Naga</div><div class="br-item" data-name="alberto&#x27;s pizza - naga" data-addr="naga, cebu" data-region="naga" data-lat="10.215" data-lng="123.77">
+<div class="bn">Alberto&#x27;s Pizza - Naga</div><div class="ba">Naga, Cebu</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="bohol">Bohol</div><div class="br-item" data-name="alberto&#x27;s pizza - tagbilaran" data-addr="carlos p. garcia ave, tagbilaran, bohol" data-region="bohol" data-lat="9.6501" data-lng="123.8538">
+<div class="bn">Alberto&#x27;s Pizza - Tagbilaran</div><div class="ba">Carlos P. Garcia Ave, Tagbilaran, Bohol</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - tubigon" data-addr="tubigon, bohol" data-region="bohol" data-lat="9.733" data-lng="123.934">
+<div class="bn">Alberto&#x27;s Pizza - Tubigon</div><div class="ba">Tubigon, Bohol</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - jagna" data-addr="jagna, bohol" data-region="bohol" data-lat="9.644" data-lng="124.076">
+<div class="bn">Alberto&#x27;s Pizza - Jagna</div><div class="ba">Jagna, Bohol</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - loay" data-addr="loay, bohol" data-region="bohol" data-lat="9.607" data-lng="123.821">
+<div class="bn">Alberto&#x27;s Pizza - Loay</div><div class="ba">Loay, Bohol</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="negros oriental">Negros Oriental</div><div class="br-item" data-name="alberto&#x27;s pizza - dumaguete" data-addr="rizal blvd, dumaguete, negros oriental" data-region="negros oriental" data-lat="9.3068" data-lng="123.3054">
+<div class="bn">Alberto&#x27;s Pizza - Dumaguete</div><div class="ba">Rizal Blvd, Dumaguete, Negros Oriental</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - tanjay" data-addr="tanjay, negros oriental" data-region="negros oriental" data-lat="9.512" data-lng="123.16">
+<div class="bn">Alberto&#x27;s Pizza - Tanjay</div><div class="ba">Tanjay, Negros Oriental</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - bais" data-addr="bais, negros oriental" data-region="negros oriental" data-lat="9.606" data-lng="123.12">
+<div class="bn">Alberto&#x27;s Pizza - Bais</div><div class="ba">Bais, Negros Oriental</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="davao city">Davao City</div><div class="br-item" data-name="alberto&#x27;s pizza - davao (jp laurel)" data-addr="j.p. laurel ave, davao city" data-region="davao city" data-lat="7.0644" data-lng="125.6077">
+<div class="bn">Alberto&#x27;s Pizza - Davao (JP Laurel)</div><div class="ba">J.P. Laurel Ave, Davao City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - davao (torres)" data-addr="torres st, davao city" data-region="davao city" data-lat="7.0731" data-lng="125.6128">
+<div class="bn">Alberto&#x27;s Pizza - Davao (Torres)</div><div class="bc"># 2530312 | 0917 237 1234</div><div class="ba">Torres St, Davao City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - davao (bajada)" data-addr="bajada, davao city" data-region="davao city" data-lat="7.082" data-lng="125.604">
+<div class="bn">Alberto&#x27;s Pizza - Davao (Bajada)</div><div class="ba">Bajada, Davao City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-rh" data-region-header="cagayan de oro">Cagayan De Oro</div><div class="br-item" data-name="alberto&#x27;s pizza - cdo (limketkai)" data-addr="limketkai dr, cagayan de oro" data-region="cagayan de oro" data-lat="8.4845" data-lng="124.652">
+<div class="bn">Alberto&#x27;s Pizza - CDO (Limketkai)</div><div class="ba">Limketkai Dr, Cagayan de Oro</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-item" data-name="alberto&#x27;s pizza - cdo (corrales)" data-addr="corrales ave, cagayan de oro" data-region="cagayan de oro" data-lat="8.481" data-lng="124.646">
+<div class="bn">Alberto&#x27;s Pizza - CDO (Corrales)</div><div class="ba">Corrales Ave, Cagayan de Oro</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 10 PM</div></div><div class="br-rh" data-region-header="butuan city">Butuan City</div><div class="br-item" data-name="alberto&#x27;s pizza - butuan" data-addr="j.c. aquino ave, butuan city" data-region="butuan city" data-lat="8.9493" data-lng="125.5436">
+<div class="bn">Alberto&#x27;s Pizza - Butuan</div><div class="ba">J.C. Aquino Ave, Butuan City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="surigao city">Surigao City</div><div class="br-item" data-name="alberto&#x27;s pizza - surigao city" data-addr="surigao city" data-region="surigao city" data-lat="9.787" data-lng="125.495">
+<div class="bn">Alberto&#x27;s Pizza - Surigao City</div><div class="ba">Surigao City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="zamboanga city">Zamboanga City</div><div class="br-item" data-name="alberto&#x27;s pizza - zamboanga" data-addr="zamboanga city" data-region="zamboanga city" data-lat="6.9214" data-lng="122.079">
+<div class="bn">Alberto&#x27;s Pizza - Zamboanga</div><div class="ba">Zamboanga City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="general santos">General Santos</div><div class="br-item" data-name="alberto&#x27;s pizza - gensan" data-addr="gen. santos drive, general santos city" data-region="general santos" data-lat="6.1126" data-lng="125.1717">
+<div class="bn">Alberto&#x27;s Pizza - GenSan</div><div class="ba">Gen. Santos Drive, General Santos City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div><div class="br-rh" data-region-header="cotabato city">Cotabato City</div><div class="br-item" data-name="alberto&#x27;s pizza - cotabato" data-addr="sultan kudarat, cotabato city" data-region="cotabato city" data-lat="7.2236" data-lng="124.2465">
+<div class="bn">Alberto&#x27;s Pizza - Cotabato</div><div class="ba">Sultan Kudarat, Cotabato City</div>
+<div class="bh"><i class="bi bi-clock"></i> 10 AM – 9 PM</div></div>
+</div><div class="no-res" id="noRes"><i class="bi bi-search" style="font-size:1.8rem;display:block;margin-bottom:.4rem"></i>No branches found. Try a different search.</div>
+</div></div></div></section>
+
+<section class="soc-sec" id="social"><div class="container text-center">
+<div class="sec-label" style="justify-content:center">Stay Connected</div>
+<h2 class="sec-title" style="margin-bottom:.4rem">Follow Us on Social Media</h2>
+<p class="sec-sub soc-sub">Get the latest updates, promos, and pizza photos.</p>
+<div class="soc-icons">
+<a href="https://web.facebook.com/albertospizza" target="_blank" rel="noopener" class="soc-ic fb" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+<a href="https://www.instagram.com/albertospizza/" target="_blank" rel="noopener" class="soc-ic ig" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+<a href="https://www.pinterest.com/albertospizza/" target="_blank" rel="noopener" class="soc-ic pi" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+</div></div></section>
+
+<footer class="ft"><div class="container"><div class="row g-4">
+<div class="col-lg-4 col-md-6"><div class="ft-brand"><img src="img/5a8d3b4b-0770-4c82-96ca-6a97a5ebcace.png" alt="Alberto's Pizza"></div>
+<p class="ft-desc">Alberto’s Pizza — The Home of Buy 1 Take 1 Pizza. Serving delicious, affordable pizzas across the Philippines.</p>
+<div class="ft-soc"><a href="https://web.facebook.com/albertospizza" target="_blank" rel="noopener" class="soc-ic fb" aria-label="Facebook"><i class="bi bi-facebook"></i></a><a href="https://www.instagram.com/albertospizza/" target="_blank" rel="noopener" class="soc-ic ig" aria-label="Instagram"><i class="bi bi-instagram"></i></a><a href="https://www.pinterest.com/albertospizza/" target="_blank" rel="noopener" class="soc-ic pi" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a></div></div>
+<div class="col-lg-2 col-md-6"><h5>Quick Links</h5><ul class="ft-links"><li><a href="#home">Home</a></li><li><a href="#about">About Us</a></li><li><a href="#menu">Menu</a></li><li><a href="#branches">Branches</a></li></ul></div>
+<div class="col-lg-3 col-md-6"><h5>Popular Pizzas</h5><ul class="ft-links"><li><a href="#menu">Super Supreme</a></li><li><a href="#menu">Hawaiian</a></li><li><a href="#menu">Pepperoni</a></li><li><a href="#menu">Cheese Overload</a></li><li><a href="#menu">Alberto’s Special</a></li></ul></div>
+<div class="col-lg-3 col-md-6"><h5>Contact Us</h5>
+<div class="ft-ci"><i class="bi bi-geo-alt-fill"></i><span>Cebu City, Philippines<br>(Main Branch)</span></div>
+<div class="ft-ci"><i class="bi bi-telephone-fill"></i><span>(032) 123-4567</span></div>
+<div class="ft-ci"><i class="bi bi-envelope-fill"></i><span>info@albertospizza.ph</span></div>
+<div class="ft-ci"><i class="bi bi-globe2"></i><span>www.albertospizza.ph</span></div></div>
+</div>
+<div class="ft-bot"><div class="row align-items-center"><div class="col-md-6 text-center text-md-start"><p>&copy; <span id="year">2026</span> Alberto’s Pizza. All rights reserved. (Static preview)</p></div>
+<div class="col-md-6 text-center text-md-end"><p>Made with <i class="bi bi-heart-fill" style="color:var(--secondary)"></i> for pizza lovers</p></div></div></div>
+</div></footer>
+
+<button class="btt" id="btt" aria-label="Back to top"><i class="bi bi-chevron-up"></i></button>
+<div class="toast-c" id="toastC"></div>
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+<div class="cart-head"><h5><i class="bi bi-cart3"></i> Your Order</h5><button class="cart-close" id="cartClose" aria-label="Close cart"><i class="bi bi-x-lg"></i></button></div>
+<div class="cart-items" id="cartItems"></div>
+<div class="cart-foot"><div class="cart-subtotal"><span>Subtotal</span><span id="cartSubtotal">₱0</span></div>
+<button class="btn-checkout" id="checkoutBtn">Checkout</button></div>
+</aside>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+const PRODUCTS = [{"id": "19", "name": "Super Supreme", "img": "super-supreme-77Ib7D.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 20, "price": 214}, "9 inch|Mozzarella": {"variation_id": 21, "price": 219}, "11 inch|Quickmelt": {"variation_id": 22, "price": 314}, "11 inch|Mozzarella": {"variation_id": 23, "price": 319}}}, {"id": "24", "name": "Hawaiian", "img": "hawaiian-zsk66R.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 25, "price": 184}, "9 inch|Mozzarella": {"variation_id": 26, "price": 189}, "11 inch|Quickmelt": {"variation_id": 27, "price": 274}, "11 inch|Mozzarella": {"variation_id": 28, "price": 279}}}, {"id": "29", "name": "Pepperoni", "img": "pepperoni-hMVHvZ.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 30, "price": 194}, "9 inch|Mozzarella": {"variation_id": 31, "price": 199}, "11 inch|Quickmelt": {"variation_id": 32, "price": 284}, "11 inch|Mozzarella": {"variation_id": 33, "price": 289}}}, {"id": "34", "name": "Cheese Overload", "img": "cheese-overload-TytcpA.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 35, "price": 204}, "9 inch|Mozzarella": {"variation_id": 36, "price": 209}, "11 inch|Quickmelt": {"variation_id": 37, "price": 294}, "11 inch|Mozzarella": {"variation_id": 38, "price": 299}}}, {"id": "39", "name": "Alberto'S Special", "img": "albertos-special-gHsZRF.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 40, "price": 224}, "9 inch|Mozzarella": {"variation_id": 41, "price": 229}, "11 inch|Quickmelt": {"variation_id": 42, "price": 324}, "11 inch|Mozzarella": {"variation_id": 43, "price": 329}}}, {"id": "44", "name": "Ham & Cheese", "img": "ham-cheese-DMSIDv.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 45, "price": 174}, "9 inch|Mozzarella": {"variation_id": 46, "price": 179}, "11 inch|Quickmelt": {"variation_id": 47, "price": 264}, "11 inch|Mozzarella": {"variation_id": 48, "price": 269}}}, {"id": "49", "name": "Veggie Garden", "img": "veggie-garden-FoBmvv.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 50, "price": 184}, "9 inch|Mozzarella": {"variation_id": 51, "price": 189}, "11 inch|Quickmelt": {"variation_id": 52, "price": 274}, "11 inch|Mozzarella": {"variation_id": 53, "price": 279}}}, {"id": "54", "name": "Bbq Chicken", "img": "bbq-chicken-j41hrt.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 55, "price": 214}, "9 inch|Mozzarella": {"variation_id": 56, "price": 219}, "11 inch|Quickmelt": {"variation_id": 57, "price": 314}, "11 inch|Mozzarella": {"variation_id": 58, "price": 319}}}, {"id": "59", "name": "Mexican Wave", "img": "mexican-wave-CqtXip.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 60, "price": 214}, "9 inch|Mozzarella": {"variation_id": 61, "price": 219}, "11 inch|Quickmelt": {"variation_id": 62, "price": 314}, "11 inch|Mozzarella": {"variation_id": 63, "price": 319}}}, {"id": "64", "name": "Mushroom & Garlic", "img": "mushroom-garlic-DGvkUd.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 65, "price": 194}, "9 inch|Mozzarella": {"variation_id": 66, "price": 199}, "11 inch|Quickmelt": {"variation_id": 67, "price": 284}, "11 inch|Mozzarella": {"variation_id": 68, "price": 289}}}, {"id": "69", "name": "Bacon & Mushroom", "img": "bacon-mushroom-S0RSEl.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 70, "price": 204}, "9 inch|Mozzarella": {"variation_id": 71, "price": 209}, "11 inch|Quickmelt": {"variation_id": 72, "price": 294}, "11 inch|Mozzarella": {"variation_id": 73, "price": 299}}}, {"id": "74", "name": "Garden Fresh", "img": "garden-fresh-vbIoEl.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 75, "price": 174}, "9 inch|Mozzarella": {"variation_id": 76, "price": 179}, "11 inch|Quickmelt": {"variation_id": 77, "price": 264}, "11 inch|Mozzarella": {"variation_id": 78, "price": 269}}}, {"id": "79", "name": "Kiddie Cheesy Delight", "img": "kiddie-cheesy-delight-CW9Efu.jpg", "vars": {"9 inch|Quickmelt": {"variation_id": 80, "price": 144}, "9 inch|Mozzarella": {"variation_id": 81, "price": 149}, "11 inch|Quickmelt": {"variation_id": 82, "price": 214}, "11 inch|Mozzarella": {"variation_id": 83, "price": 219}}}];
+const peso = n => '\u20B1' + Math.round(n);
+const $ = (s, c=document) => c.querySelector(s);
+const $$ = (s, c=document) => [...c.querySelectorAll(s)];
+const store = {
+  load(){ try { return JSON.parse(localStorage.getItem('alberto_cart')||'[]'); } catch(e){ return []; } },
+  save(c){ localStorage.setItem('alberto_cart', JSON.stringify(c)); }
+};
+function toast(msg, icon='bi-check-circle'){
+  const t = document.createElement('div');
+  t.className = 'c-toast'; t.innerHTML = '<i class="bi '+icon+'"></i> ' + msg;
+  $('#toastC').appendChild(t); setTimeout(()=>t.remove(), 2800);
+}
+/* Fade-in */
+(function(){
+  const reveal = () => $$('.fi').forEach(el=>el.classList.add('vis'));
+  if ('IntersectionObserver' in window){
+    const ob = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('vis'); }),{threshold:.1});
+    $$('.fi').forEach(el=>ob.observe(el));
+  }
+  document.readyState==='loading' ? document.addEventListener('DOMContentLoaded',reveal) : reveal();
+  window.addEventListener('load',reveal); setTimeout(reveal,300);
+})();
+/* Navbar + scrollspy + back-to-top */
+(function(){
+  const nb = $('.nb'), btt = $('#btt'), secs = ['home','about','menu','branches','social'];
+  function onScroll(){
+    const y = window.scrollY;
+    nb.classList.toggle('scrolled', y>30);
+    btt.classList.toggle('vis', y>400);
+    const pos = y+120; let cur = secs[0];
+    secs.forEach(id=>{ const s=document.getElementById(id); if(s && s.offsetTop<=pos) cur=id; });
+    $$('.nb .nav-link').forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+cur));
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+})();
+/* Menu filter tabs + search */
+function applyMenuFilter(){
+  const f = ($('.m-filter .bf.on')||{}).dataset?.f || 'all';
+  const q = ($('#mSearch').value||'').toLowerCase().trim();
+  let n = 0;
+  $$('.mc-col').forEach(col=>{
+    const cats = ' '+(col.dataset.cat||'')+' ';
+    const okF = f==='all' || cats.includes(' '+f+' ');
+    const okQ = !q || (col.dataset.name||'').includes(q) || (col.dataset.desc||'').includes(q);
+    const show = okF && okQ; col.style.display = show?'':'none'; if(show) n++;
+  });
+  $('#noMenu').classList.toggle('show', n===0);
+}
+$$('.m-filter .bf').forEach(b=>b.addEventListener('click',()=>{
+  $$('.m-filter .bf').forEach(x=>x.classList.remove('on')); b.classList.add('on'); applyMenuFilter();
+}));
+$('#mSearch').addEventListener('input',e=>{
+  $('#mSearchClear').style.display = e.target.value.trim()?'':'none'; applyMenuFilter();
+});
+$('#mSearchClear').addEventListener('click',()=>{
+  $('#mSearch').value=''; $('#mSearchClear').style.display='none';
+  $$('.m-filter .bf').forEach(x=>x.classList.toggle('on',x.dataset.f==='all')); applyMenuFilter();
+});
+/* Qty + totals */
+function cardVars(card){ try { return JSON.parse(card.dataset.variations||'{}'); } catch(e){ return {}; } }
+function recalc(card){
+  const qty = parseInt($('.qty-val',card).textContent,10)||1;
+  const size = ($('input[name^="size-"]:checked',card)||{}).value||'';
+  const cheese = ($('input[name^="cheese-"]:checked',card)||{}).value||'';
+  const entry = cardVars(card)[size+'|'+cheese];
+  $('.mc-total',card).textContent = peso((entry?entry.price:0)*qty);
+}
+document.addEventListener('click',e=>{
+  const q = e.target.closest('.btn-qty');
+  if(q){
+    const card = q.closest('.mc'), val = $('.qty-val',card);
+    let n = parseInt(val.textContent,10)||1;
+    n = q.dataset.action==='inc' ? n+1 : Math.max(1,n-1);
+    val.textContent = n; recalc(card);
+  }
+});
+document.addEventListener('change',e=>{
+  if(e.target.matches('.mc-opt-row input[type="radio"]')) recalc(e.target.closest('.mc'));
+});
+$$('.mc').forEach(recalc);
+/* Static cart (localStorage) */
+function cartCount(){ return store.load().reduce((a,l)=>a+l.qty,0); }
+function refreshNav(){
+  const n = cartCount(), btn=$('#navCartBtn'), ic=$('#navCartIcon'), lb=$('#navCartLabel');
+  if(n>0){ ic.className='bi bi-cart3'; lb.textContent='Cart ('+n+')'; btn.setAttribute('href','#'); }
+  else { ic.className='bi bi-pizza'; lb.textContent='Order Now'; btn.setAttribute('href','#menu'); }
+}
+function renderCart(){
+  const cart = store.load(), box = $('#cartItems');
+  if(!cart.length){ box.innerHTML = '<div class="cart-empty"><i class="bi bi-pizza" style="font-size:2rem"></i><br>Your cart is empty.<br>Add a pizza from the menu!</div>'; }
+  else box.innerHTML = cart.map((l,i)=>{
+    const p = PRODUCTS.find(x=>x.id===l.pid)||{};
+    return '<div class="cart-line"><img src="img/'+(p.img||'')+'" alt=""><div style="flex:1">'
+      +'<div class="cl-name">'+p.name+'</div><div class="cl-meta">'+l.size+' &middot; '+l.cheese+'</div>'
+      +'<div class="cl-row"><span class="cl-qty"><button data-a="dec" data-i="'+i+'">-</button><b>'+l.qty+'</b><button data-a="inc" data-i="'+i+'">+</button></span>'
+      +'<span class="cl-total">'+peso(l.price*l.qty)+'</span></div></div>'
+      +'<button class="cl-rm" data-i="'+i+'" aria-label="Remove"><i class="bi bi-trash"></i></button></div>';
+  }).join('');
+  const sub = cart.reduce((a,l)=>a+l.price*l.qty,0);
+  $('#cartSubtotal').textContent = peso(sub);
+}
+function openCart(){ renderCart(); $('#cartDrawer').classList.add('show'); $('#cartOverlay').classList.add('show'); }
+function closeCart(){ $('#cartDrawer').classList.remove('show'); $('#cartOverlay').classList.remove('show'); }
+document.addEventListener('click',e=>{
+  const add = e.target.closest('.btn-add-order');
+  if(add){
+    const card = add.closest('.mc');
+    const size = ($('input[name^="size-"]:checked',card)||{}).value||'';
+    const cheese = ($('input[name^="cheese-"]:checked',card)||{}).value||'';
+    const entry = cardVars(card)[size+'|'+cheese];
+    if(!entry){ toast('Please select options','bi-exclamation-circle'); return; }
+    const cart = store.load();
+    const same = cart.find(l=>l.pid===card.dataset.productId && l.size===size && l.cheese===cheese);
+    const qty = parseInt($('.qty-val',card).textContent,10)||1;
+    if(same) same.qty += qty; else cart.push({pid:card.dataset.productId,size,cheese,qty,price:entry.price});
+    store.save(cart); refreshNav(); toast('Added to your order!'); openCart(); return;
+  }
+  const nav = e.target.closest('#navCartBtn');
+  if(nav && cartCount()>0){ e.preventDefault(); openCart(); return; }
+  const cq = e.target.closest('.cart-line .cl-qty button');
+  if(cq){
+    const cart = store.load(), l = cart[+cq.dataset.i];
+    if(l){ l.qty += cq.dataset.a==='inc'?1:-1; if(l.qty<1) cart.splice(+cq.dataset.i,1); store.save(cart); renderCart(); refreshNav(); }
+    return;
+  }
+  const rm = e.target.closest('.cl-rm');
+  if(rm){ const cart = store.load(); cart.splice(+rm.dataset.i,1); store.save(cart); renderCart(); refreshNav(); return; }
+});
+$('#cartClose').addEventListener('click',closeCart);
+$('#cartOverlay').addEventListener('click',closeCart);
+$('#checkoutBtn').addEventListener('click',()=>toast('Checkout is disabled in this static preview','bi-info-circle'));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeCart(); });
+refreshNav();
+/* Branches */
+(function(){
+  const DEF = {lat:10.3157,lng:123.8854,z:6};
+  const st = {...DEF};
+  const frame = $('#mapFrame');
+  const render = () => frame.src = 'https://maps.google.com/maps?q='+st.lat+','+st.lng+'&z='+st.z+'&output=embed';
+  $('#brSearch').addEventListener('input',e=>{
+    const q = e.target.value.toLowerCase().trim();
+    $('#brSearchClear').style.display = q?'':'none';
+    let n = 0;
+    $$('.br-item').forEach(it=>{
+      const m = !q || (it.dataset.name||'').includes(q) || (it.dataset.addr||'').includes(q) || (it.dataset.region||'').includes(q);
+      it.style.display = m?'':'none'; if(m) n++;
+    });
+    $$('.br-rh').forEach(rh=>{
+      const reg = (rh.dataset.regionHeader||'').toLowerCase();
+      const any = $$('.br-item').some(it=>it.style.display!=='none' && (it.dataset.region||'')===reg);
+      rh.style.display = any?'':'none';
+    });
+    $('#noRes').classList.toggle('show', n===0);
+    if(!q){ Object.assign(st,DEF); render(); $$('.br-item').forEach(x=>x.classList.remove('on')); }
+  });
+  $('#brSearchClear').addEventListener('click',()=>{ $('#brSearch').value=''; $('#brSearch').dispatchEvent(new Event('input')); });
+  document.addEventListener('click',e=>{
+    const it = e.target.closest('.br-item'); if(!it) return;
+    $$('.br-item').forEach(x=>x.classList.remove('on')); it.classList.add('on');
+    if(it.dataset.lat && it.dataset.lng){ st.lat=it.dataset.lat; st.lng=it.dataset.lng; st.z=15; render(); }
+  });
+  $('#mapZoomIn').addEventListener('click',()=>{ st.z=Math.min(20,(+st.z||DEF.z)+1); render(); });
+  $('#mapZoomOut').addEventListener('click',()=>{ st.z=Math.max(2,(+st.z||DEF.z)-1); render(); });
+})();
+$('#year').textContent = new Date().getFullYear();
+
+</script>
+</body>
+</html>
